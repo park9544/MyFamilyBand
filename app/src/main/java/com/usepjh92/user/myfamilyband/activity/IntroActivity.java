@@ -33,6 +33,7 @@ public class IntroActivity extends AppCompatActivity {
             Intent intent = new Intent(IntroActivity.this , MainActivity.class);
             startActivity(intent);
 
+            finish();
         }
     };
 
