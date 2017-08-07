@@ -15,42 +15,66 @@
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_clear_black_48dp"
-            android:clickable="true"
             android:background="@drawable/border"
+            android:clickable="true"
+            android:onClick="clickExit"
             android:scaleType="centerCrop"
-            android:onClick="clickExit"/>
+            android:src="@drawable/ic_clear_black_48dp" />
 
         <EditText
             android:id="@+id/edit_title"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:padding="8dp"
-            android:hint="제목을 입력해주세요"
             android:background="#ffffff"
+            android:hint="제목을 입력해주세요"
+            android:padding="8dp"
             android:textSize="18sp" />
 
         <TextView
             android:layout_width="48dp"
             android:layout_height="match_parent"
-            android:text="com"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:clickable="true"
             android:background="@drawable/border"
-            android:onClick="clickCom"/>
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="clickCom"
+            android:text="com"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/edit_write"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="가족들에게 전할말을 남겨주세요"
-        android:textSize="18sp"
-        android:inputType="text"
-        android:gravity="top"/>
+        android:background="#ffffff">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:visibility="gone"/>
+
+            <EditText
+                android:id="@+id/edit_write"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:background="#ffffff"
+                android:hint="가족들에게 전할말을 남겨주세요"
+                android:inputType="none"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 
 </LinearLayout>
