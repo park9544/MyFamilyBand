@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context="com.usepjh92.user.myfamilyband.activity.WriteActivity">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -43,38 +45,55 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffffff">
+        android:layout_height="match_parent">
 
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff"
-            android:orientation="vertical">
+            android:background="#ffffff">
 
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:visibility="gone"/>
-
-            <EditText
-                android:id="@+id/edit_write"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="top"
                 android:background="#ffffff"
-                android:hint="가족들에게 전할말을 남겨주세요"
-                android:inputType="none"
-                android:textSize="24sp" />
-
-        </LinearLayout>
-
-    </ScrollView>
+                android:orientation="vertical">
 
 
+                <ImageView
+                    android:id="@+id/plus_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:visibility="gone"/>
+
+                <EditText
+                    android:id="@+id/edit_write"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:background="#ffffff"
+                    android:hint="가족들에게 전할말을 남겨주세요"
+                    android:inputType="none"
+                    android:textSize="24sp" />
+
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_add_a_photo_black_36dp"
+            android:clickable="true"
+            android:onClick="clickImg"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

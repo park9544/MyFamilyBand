@@ -106,7 +106,7 @@ public class Fragment1 extends Fragment {
         new Thread() {
             @Override
             public void run() {
-                upLoadFile();
+               // upLoadFile();
             }
         }.start();
 
@@ -133,123 +133,7 @@ public class Fragment1 extends Fragment {
 //    }
 
 
-    public void upLoadFile() {
 
-        final String lineEnd = "\r\n";
-        final String twoHyphens = "--";
-        final String boundary = "*****";
-
-        imgPath = imgUri.toString();
-//        imgPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).
-//                getAbsolutePath() + "/Screenshots/Screenshot_20170624-184948.png";
-
-//        if (imgPath.contains("content://")) {
-        //갤러리 or 사진앱으로 선택했을시...
-        //Cursor cursor = getActivity().getContentResolver().query(imgUri, null, null, null, null);
-  //"_data"
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getActivity().getContentResolver().query(imgUri, projection, null, null, null);
-        if (imgPath.contains("content://")) {
-            if (cursor != null && cursor.getCount() != 0) {
-                if (cursor != null) {
-                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    cursor.moveToFirst();
-                    imgPath = cursor.getString(column_index);
-
-//                cursor.moveToFirst();
-//                String[] cnt = cursor.getColumnNames();
-//                Log.i("cnt", Arrays.toString(cnt));
-//                Log.i("name", cursor.getString(0));
-//                Log.i("name", cursor.getString(1));
-//                Log.i("name", cursor.getString(2));
-//                Log.i("name", cursor.getString(3));
-//                Log.i("name", cursor.getString(4));
-//                Log.i("name", cursor.getString(5));
-                }
-            }
-        } else if (imgPath.contains("file://")) {
-            //파일매니저로 선택했을시
-            imgPath = imgUri.getPath();
-        }
-
-        Log.e("imgpath", imgPath);
-
-        new Thread() {
-
-            @Override
-            public void run() {
-
-                try {
-                    URL url = new URL(upLoadServerURL);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setDoInput(true);
-                    conn.setDoOutput(true);
-                    conn.setUseCaches(false);
-
-                    //파일 전송의 헤더 영역 속성 설정...
-                    conn.setRequestProperty("Connection", "Keep-Alive");
-                    conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-
-                    //파일전송의 body 영역에 들어갈 Data 작성 및 Output
-                    OutputStream os = conn.getOutputStream();
-                    DataOutputStream dos = new DataOutputStream(os);
-
-                    dos.writeBytes(twoHyphens + boundary + lineEnd);
-                    dos.writeBytes("Content-Disposition:form-data;name=uploaded_file;filename=" + imgPath + lineEnd);
-                    dos.writeBytes(lineEnd);
-                    //파일전송의 body 에 들어갈 실제 이미지의 byte 데이터 output
-                    FileInputStream fis = new FileInputStream(imgPath);
-                    int availableByte = fis.available(); // 보낼 이미지의 총 바이트수 얻어오기...
-                    Log.i("avilable", availableByte + "");
-                    //데이터의 전송은 1024 byte(1kb) 단위로 나누어서 보냄..
-                    int bufferSize = Math.min(availableByte, 1024);
-                    byte[] buffer = new byte[bufferSize];
-
-                    //이미지 파일에서 buffer 배열로 이미지의 바이트데이터를 읽어오기
-                    //현재 읽을 번째의 0번째부터 버퍼사이즈만큼 읽어오기
-                    int readByte = fis.read(buffer, 0, bufferSize); //리턴값 읽어온 바이트 수.. 없으면 -1
-
-                    while (readByte > 0) {
-                        Log.i("bufferSize", buffer.length + "");
-                        dos.write(buffer, 0, bufferSize); //파일 전송에 body 에 들어갈 Data 작성..
-                        availableByte = fis.available(); // 읽어간 값을 제외한 나머지 바이트 수...
-                        bufferSize = Math.min(availableByte, 1024);
-                        readByte = fis.read(buffer, 0, bufferSize);
-
-                    }
-
-                    dos.writeBytes(lineEnd);
-                    dos.writeBytes(twoHyphens + boundary + lineEnd);
-                    dos.flush();
-                    dos.close();
-                    Log.i("complete", "aaaaaa");
-                    //서버로 부터 파일업로드가 잘 되었는지 응답받기...
-                    InputStream is = conn.getInputStream();
-                    InputStreamReader isr = new InputStreamReader(is);
-                    BufferedReader reader = new BufferedReader(isr);
-
-                    StringBuffer sb = new StringBuffer();
-                    String line = reader.readLine();
-
-                    while (line != null) {
-                        Log.i("line", line);
-                        line = reader.readLine();
-                    }
-                } catch (MalformedURLException e) {
-                    Log.i("URL", "URL ERROR");
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    Log.i("io", "io ERROR");
-                    e.printStackTrace();
-                }
-
-            }//run method...
-
-        }.start();
-
-
-    }
 
 
 }
