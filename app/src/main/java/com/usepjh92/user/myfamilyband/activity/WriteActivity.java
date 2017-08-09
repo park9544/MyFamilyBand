@@ -99,7 +99,14 @@ public class WriteActivity extends AppCompatActivity {
     }
 
     public void clickCom(View v) {
-        upLoadData();
+
+        new Thread(){
+            @Override
+            public void run() {
+
+                upLoadData();
+            }
+        }.start();
     }
 
     // public void upLoadFile() {
@@ -211,26 +218,7 @@ public class WriteActivity extends AppCompatActivity {
 
     public void upLoadData() {
 
-        final String lineEnd = "\r\n";
-        final String twoHyphens = "--";
-        final String boundary = "*****";
 
-        imgPath = imgUri.toString();
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(imgUri, projection, null, null, null);
-        if (imgPath.contains("content://")) {
-            if (cursor != null && cursor.getCount() != 0) {
-                if (cursor != null) {
-                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                    cursor.moveToFirst();
-                    imgPath = cursor.getString(column_index);
-
-                }
-            }
-        } else if (imgPath.contains("file://")) {
-            //파일매니저로 선택했을시
-            imgPath = imgUri.getPath();
-        }
 
         new Thread() {
 
@@ -269,12 +257,36 @@ public class WriteActivity extends AppCompatActivity {
 
                     while (line != null) {
                         Log.i("line", line);
+                        sb.append(line);
                         line = reader.readLine();
                     }
 
-                    Log.i("imgPath", imgPath + "");
 
-                    if (imgPath != null) {
+                    //
+                    if (imgUri != null) {
+
+                        final String lineEnd = "\r\n";
+                        final String twoHyphens = "--";
+                        final String boundary = "*****";
+
+                        imgPath = imgUri.toString();
+
+                        String[] projection = {MediaStore.Images.Media.DATA};
+                        Cursor cursor = getContentResolver().query(imgUri, projection, null, null, null);
+                        if (imgPath.contains("content://")) {
+                            if (cursor != null && cursor.getCount() != 0) {
+                                if (cursor != null) {
+                                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                                    cursor.moveToFirst();
+                                    imgPath = cursor.getString(column_index);
+
+                                }
+                            }
+                        } else if (imgPath.contains("file://")) {
+                            //파일매니저로 선택했을시
+                            imgPath = imgUri.getPath();
+                        }
+
 
                         URL url1 = new URL(upLoadServerURL);
                         HttpURLConnection conn1 = (HttpURLConnection) url1.openConnection();
@@ -331,6 +343,7 @@ public class WriteActivity extends AppCompatActivity {
 
                         while (line1 != null) {
                             Log.i("line", line1);
+                            sb1.append(line1);
                             line1 = reader1.readLine();
                         }
 
@@ -346,6 +359,8 @@ public class WriteActivity extends AppCompatActivity {
                     });
 
                     handler.sendEmptyMessage(0);
+
+                    imgUri=null;
 
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
