@@ -4,18 +4,21 @@ package com.usepjh92.user.myfamilyband.item;
 
 public class Item {
 
-//    public String videoUri;
-//    public String imgUri;
-    public String name;
-    public String date;
+    public String title;
     public String desc;
+    public String imgUrl;
 
-    public Item(String name, String date, String desc) {
-//        this.videoUri = videoUri;
-//        this.imgUri = imgUri;
-        this.name = name;
-        this.date = date;
+    public Item() {
+    }
+
+    public Item(String title, String desc) {
+        this.title = title;
         this.desc = desc;
     }
 
+    public Item(String title, String desc, String imgUrl) {
+        this.title = title;
+        this.desc = desc;
+        this.imgUrl = imgUrl;
+    }
 }

@@ -17,6 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.error.VolleyError;
+import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.toolbox.Volley;
 import com.usepjh92.user.myfamilyband.R;
 import com.usepjh92.user.myfamilyband.item.WriteItem;
 
@@ -100,7 +106,7 @@ public class WriteActivity extends AppCompatActivity {
 
     public void clickCom(View v) {
 
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
 
@@ -109,32 +115,32 @@ public class WriteActivity extends AppCompatActivity {
         }.start();
     }
 
-    // public void upLoadFile() {
-//   final String lineEnd = "\r\n";
-//    final String twoHyphens = "--";
-//    final String boundary = "*****";
+//    public void upLoadFile() {
+//        final String lineEnd = "\r\n";
+//        final String twoHyphens = "--";
+//        final String boundary = "*****";
 //
-//    imgPath = imgUri.toString();
-//    String[] projection = {MediaStore.Images.Media.DATA};
-//    Cursor cursor = getContentResolver().query(imgUri, projection, null, null, null);
+//        imgPath = imgUri.toString();
+//        String[] projection = {MediaStore.Images.Media.DATA};
+//        Cursor cursor = getContentResolver().query(imgUri, projection, null, null, null);
 //        if (imgPath.contains("content://")) {
-//        if (cursor != null && cursor.getCount() != 0) {
-//            if (cursor != null) {
-//                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//                cursor.moveToFirst();
-//                imgPath = cursor.getString(column_index);
+//            if (cursor != null && cursor.getCount() != 0) {
+//                if (cursor != null) {
+//                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//                    cursor.moveToFirst();
+//                    imgPath = cursor.getString(column_index);
 //
+//                }
 //            }
+//        } else if (imgPath.contains("file://")) {
+//            //파일매니저로 선택했을시
+//            imgPath = imgUri.getPath();
 //        }
-//    } else if (imgPath.contains("file://")) {
-//        //파일매니저로 선택했을시
-//        imgPath = imgUri.getPath();
-//    }
 //
 //        Log.e("imgpath", imgPath);
-
-    //  new Thread() {
-
+//
+//        new Thread() {
+//
 //            @Override
 //            public void run() {
 //
@@ -218,8 +224,6 @@ public class WriteActivity extends AppCompatActivity {
 
     public void upLoadData() {
 
-
-
         new Thread() {
 
             @Override
@@ -261,8 +265,6 @@ public class WriteActivity extends AppCompatActivity {
                         line = reader.readLine();
                     }
 
-
-                    //
                     if (imgUri != null) {
 
                         final String lineEnd = "\r\n";
@@ -360,7 +362,7 @@ public class WriteActivity extends AppCompatActivity {
 
                     handler.sendEmptyMessage(0);
 
-                    imgUri=null;
+                    imgUri = null;
 
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
@@ -376,6 +378,4 @@ public class WriteActivity extends AppCompatActivity {
 
 
     }
-
-
 }
