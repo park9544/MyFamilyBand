@@ -258,7 +258,6 @@ public class WriteActivity extends AppCompatActivity {
 
                     StringBuffer sb = new StringBuffer();
                     String line = reader.readLine();
-
                     while (line != null) {
                         Log.i("line", line);
                         sb.append(line);
