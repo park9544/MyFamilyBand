@@ -31,7 +31,6 @@ public class Fragment2 extends android.support.v4.app.Fragment {
     Frag2RecyclerAdapter adapter;
     RecyclerView recyclerView;
     String loadUrl = "http://neworld.dothome.co.kr/android/loadDB.php";
-    String lineend = "\r\n";
 
     SwipeRefreshLayout refreshLayout;
 
