@@ -1,6 +1,7 @@
 package com.usepjh92.user.myfamilyband.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,7 +32,6 @@ public class Fragment2 extends android.support.v4.app.Fragment {
     Frag2RecyclerAdapter adapter;
     RecyclerView recyclerView;
     String loadUrl = "http://neworld.dothome.co.kr/android/loadDB.php";
-    String lineend = "\r\n";
 
     SwipeRefreshLayout refreshLayout;
 
@@ -54,6 +54,10 @@ public class Fragment2 extends android.support.v4.app.Fragment {
 
         refreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
 
+
+
+
+
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -74,6 +78,7 @@ public class Fragment2 extends android.support.v4.app.Fragment {
         }
     };
 
+    //DB 에서 텍스트와 이미지를 불러오는 작업..
     public void loadDB() {
 
 

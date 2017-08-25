@@ -1,12 +1,12 @@
 package com.usepjh92.user.myfamilyband.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
+import android.util.Log;
 
 import com.usepjh92.user.myfamilyband.R;
 import com.usepjh92.user.myfamilyband.adapter.FragPageAdapter;
@@ -39,5 +39,15 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.setSelectedTabIndicatorColor(Color.BLACK);
 
+        Intent intent = getIntent();
+
+        int userId = intent.getExtras().getInt("userId");
+        String userName = intent.getExtras().getString("nickName");
+        String profileImg = intent.getExtras().getString("profileImg");
+
+        Log.e("main " , userId +"," +userName+ "," +profileImg);
+
+
     }
+
 }
